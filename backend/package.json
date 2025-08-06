@@ -4,7 +4,8 @@
     "build": "drizzle-kit generate",
     "migrate": "drizzle-kit push",
     "test": "bun test",
-    "start": "bun index.ts"
+    "start": "bun index.ts",
+    "seed": "bun scripts/seed.ts"
   },
   "name": "crm",
   "module": "index.ts",
@@ -24,6 +25,7 @@
     "@hono/stytch-auth": "^0.1.1",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.4",
+    "drizzle-seed": "^0.3.1",
     "hono": "^4.8.12",
     "pg": "^8.16.3",
     "postgres": "^3.4.7",
