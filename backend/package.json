@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "dev": "bun --watch index.ts",
+    "dev": "bun --watch src/index.ts",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit push",
     "test": "bun test",
-    "start": "bun index.ts",
+    "test:coverage": "bun test --coverage",
+    "start": "bun src/index.ts",
     "seed": "bun scripts/seed.ts"
   },
   "name": "crm",
@@ -12,8 +13,10 @@
   "type": "module",
   "private": true,
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/bun": "latest",
     "@types/pg": "^8.15.5",
+    "bcrypt": "^6.0.0",
     "drizzle-kit": "^0.31.4",
     "tsx": "^4.20.3"
   },
@@ -23,12 +26,14 @@
   "dependencies": {
     "@hono/node-server": "^1.18.1",
     "@hono/stytch-auth": "^0.1.1",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.4",
     "drizzle-seed": "^0.3.1",
     "hono": "^4.8.12",
     "pg": "^8.16.3",
     "postgres": "^3.4.7",
-    "stytch": "^12.27.1"
+    "stytch": "^12.27.1",
+    "zod": "^4.0.0"
   }
 }

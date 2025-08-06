@@ -1,70 +1,66 @@
-import { NewUser, User } from '@/modules/user/models/userModel';
+import { crypt } from '@/middlewares/passwordBycript';
+import { ApiResponse, NewUser, User } from '@/modules/user/@types/userTypes.';
 import * as repo from '@/modules/user/repositories/userRepository';
 
-import { ApiResponse, GetUsersParams } from '@/modules/user/models/userModel';
-
-export async function createUser(user: NewUser): Promise<ApiResponse<User>> {
+export async function createUser(data: NewUser): Promise<ApiResponse<User>> {
   try {
-    const created = await repo.insertUser(user);
-    if (!created) return { success: false, error: 'Falha ao criar usuário.' };
+    if (!data.password) {
+      throw new Error('Password required');
+    }
+    const hashedPassword = await crypt({ password: data.password });
+    const userWithHashedPassword = { ...data, password: hashedPassword };
+    const created = await repo.insertUser(userWithHashedPassword);
+    if (!created) throw new Error('Erro create user');
+
     return { success: true, data: created };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error: 'Erro interno ao criar usuário.' };
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
 }
 
-export async function getUsers(params: GetUsersParams): Promise<ApiResponse<User[]>> {
+export async function getUsers(): Promise<ApiResponse<User[]>> {
   try {
-    const users = await repo.selectUsers(params);
-    return { success: true, data: users };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error: 'Erro ao buscar usuários.' };
+    const list = await repo.selectUsers();
+    return { success: true, data: list };
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
 }
 
 export async function getUserById(id: number): Promise<ApiResponse<User>> {
   try {
     const user = await repo.selectUserById(id);
-    if (!user) return { success: false, error: 'Usuário não encontrado.' };
+    if (!user) throw new Error('User not Found');
     return { success: true, data: user };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error: 'Erro ao buscar usuário.' };
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
 }
 
-export async function updateUser(id: number, data: Partial<NewUser>): Promise<ApiResponse<User>> {
+export async function updateUserById(
+  id: number,
+  data: Partial<NewUser>
+): Promise<ApiResponse<User>> {
   try {
-    const updated = await repo.updateUserById(id, data);
-    if (!updated) return { success: false, error: 'Falha ao atualizar usuário.' };
+    const updated = await repo.updateUser(id, data);
+    if (!updated) throw new Error('Error Update');
     return { success: true, data: updated };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error: 'Erro interno ao atualizar usuário.' };
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
 }
 
-export async function deleteUser(id: number): Promise<ApiResponse<null>> {
+export async function deleteUserById(
+  id: number
+): Promise<ApiResponse<{ message: string; id: number }>> {
   try {
-    if (await hasDependents(id)) {
-      return {
-        success: false,
-        error: 'Usuário não pode ser deletado pois possui usuários dependentes.',
-      };
+    const deleted = await repo.deleteUser(id);
+    console.log(deleted);
+    if (!deleted) {
+      return { success: false, error: 'User not found' };
     }
-
-    const deleted = await repo.deleteUserById(id);
-    if (!deleted) return { success: false, error: 'Falha ao deletar usuário.' };
-    return { success: true, data: null };
-  } catch (error: any) {
-    console.error(error);
-    return { success: false, error: 'Erro interno ao deletar usuário.' };
+    return { success: true, data: { message: 'User deleted', id } };
+  } catch (e) {
+    return { success: false, error: (e as Error).message };
   }
-}
-
-async function hasDependents(userId: number): Promise<boolean> {
-  const dependents = await repo.findUsersByInvitee(userId);
-  return dependents.length > 0;
 }

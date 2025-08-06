@@ -1,39 +1,35 @@
-@baseURL = http://localhost:3000
+@baseURL = http://localhost:3005
 
-### Health Check ou Root
+### ✅ Health Check ou Root
 GET {{baseURL}}/
 
-### UserRoutes - Listar usuários
+### ✅ Listar todos os usuários
 GET {{baseURL}}/users
 
-### UserRoutes - Buscar usuário pelo ID
+### ✅ Buscar usuário por ID
+GET {{baseURL}}/users/11
 
-GET {{baseURL}}/users/4
-
-### UserRoutes - Criar usuário
+### ✅ Criar novo usuário
 POST {{baseURL}}/users
 Content-Type: application/json
 
 {
-  "firstName": "Andserson",
+  "firstName": "Anderson",
   "lastName": "Rodrigues",
-  "email": "andesrson@outlook.com",
-  "invitee": 1
+  "email": "anderson@outlook.com",
+  "password": "senha123"
 }
 
-### UserRoutes - Editar usuário
-PUT {{baseURL}}/users/1
+### ✅ Atualizar usuário existente
+PUT {{baseURL}}/users/11
 Content-Type: application/json
 
-
 {
-  "firstName": "Andserson",
+  "firstName": "Anderson Atualizado",
   "lastName": "Rodrigues",
-  "email": "andes21rson@outlook.com",
-  "invitee": 1
+  "email": "anderson.novo@outlook.com",
+  "password": "novaSenha456"
 }
 
-
-### UserRoutes - Deletar usuario
-
-DELETE {{baseURL}}/users/1
+### ✅ Deletar usuário
+DELETE {{baseURL}}/users/15
