@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "bun --watch index.ts",
-    "build": "drizzle-kit generate",
+    "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit push",
     "test": "bun test",
     "start": "bun index.ts",

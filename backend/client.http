@@ -1,3 +1,39 @@
 @baseURL = http://localhost:3000
 
-GET {{baseURL}}/health
+### Health Check ou Root
+GET {{baseURL}}/
+
+### UserRoutes - Listar usuários
+GET {{baseURL}}/users
+
+### UserRoutes - Buscar usuário pelo ID
+
+GET {{baseURL}}/users/4
+
+### UserRoutes - Criar usuário
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+  "firstName": "Andserson",
+  "lastName": "Rodrigues",
+  "email": "andesrson@outlook.com",
+  "invitee": 1
+}
+
+### UserRoutes - Editar usuário
+PUT {{baseURL}}/users/1
+Content-Type: application/json
+
+
+{
+  "firstName": "Andserson",
+  "lastName": "Rodrigues",
+  "email": "andes21rson@outlook.com",
+  "invitee": 1
+}
+
+
+### UserRoutes - Deletar usuario
+
+DELETE {{baseURL}}/users/1
