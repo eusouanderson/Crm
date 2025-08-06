@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "dev": "bun --watch index.ts",
+    "build": "drizzle-kit generate",
+    "migrate": "drizzle-kit push",
+    "test": "bun test",
+    "start": "bun index.ts"
+  },
+  "name": "crm",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.15.5",
+    "drizzle-kit": "^0.31.4",
+    "tsx": "^4.20.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.18.1",
+    "@hono/stytch-auth": "^0.1.1",
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.4",
+    "hono": "^4.8.12",
+    "pg": "^8.16.3",
+    "postgres": "^3.4.7",
+    "stytch": "^12.27.1"
+  }
+}
