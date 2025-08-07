@@ -10,25 +10,9 @@ jobs:
   test:
     name: 🔧 Run tests with Bun
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: crm_test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-    env:
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
-      NODE_ENV: test
+    environment:
+      name: SUPABASE_TEST_DB_URL
+      # url: https://your-app-url.com
 
     steps:
       - name: 📥 Checkout repo
@@ -43,40 +27,34 @@ jobs:
         run: bun install
         working-directory: ./backend
 
-      - name: ⏳ Wait for PostgreSQL to be ready
+      - name: ⚙️ Setup test environment
         run: |
-          for i in {1..10}; do
-            if pg_isready -h localhost -p 5432 -U postgres -d crm_test; then
-              echo "PostgreSQL is ready!"
-              exit 0
-            fi
-            echo "Waiting for PostgreSQL... Attempt $i/10"
-            sleep 3
-          done
-          echo "PostgreSQL failed to start"
-          exit 1
+          echo "DATABASE_URL=${{ secrets.SUPABASE_TEST_DB_URL }}" > .env.test
+          echo "NODE_ENV=test" >> .env.test
+          echo "VITE_STYTCH_API_URL=http://test.stytch.com" >> .env.test
+        working-directory: ./backend
+
+      - name: ⏳ Wait for database (for Supabase)
+        run: sleep 15
 
       - name: ⚙️ Run migrations
-        run: |
-          bun run migrate
-          # Verifica se as tabelas foram criadas
-          psql $DATABASE_URL -c "\dt"
+        run: bun run migrate
         working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_TEST_DB_URL }}
 
       - name: 🌱 Seed database
-        run: |
-          bun run seed
-          # Verifica se os dados foram inseridos (ajuste para suas tabelas)
-          psql $DATABASE_URL -c "SELECT COUNT(*) FROM users;" || true
+        run: bun run seed
         working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_TEST_DB_URL }}
 
       - name: 🧪 Run tests
         run: bun test
         working-directory: ./backend
-
-      - name: 🧾 Coverage
-        run: bun run test:coverage
-        working-directory: ./backend
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_TEST_DB_URL }}
+          NODE_ENV: test
 
       - name: ⬆️ Upload coverage artifact
         uses: actions/upload-artifact@v4
