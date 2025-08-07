@@ -50,21 +50,22 @@ jobs:
         working-directory: ./backend
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
-      - name: 🧾 Coverage
-        run: bun run test:coverage
-        working-directory: ./backend
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
       - name: Kill any process on port 3000
         run: |
           lsof -t -i :3000 | xargs -r kill -9
+
       - name: 🧪 Run tests
         run: bun test
         working-directory: ./backend
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
+      - name: 🧾 Coverage
+        run: bun run test:coverage
+        working-directory: ./backend
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
       - name: ⬆️ Upload coverage artifact
         uses: actions/upload-artifact@v4
         with:
