@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// Schema completo com password
 export const AuthSchema = z.object({
   id: z.number(),
   firstName: z.string().nullable(),
@@ -8,8 +9,10 @@ export const AuthSchema = z.object({
   password: z.string().nullable(),
 });
 
-export type Auth = z.infer<typeof AuthSchema>;
+export const AuthResponseSchema = AuthSchema.omit({ password: true });
 
+export type Auth = z.infer<typeof AuthSchema>;
+export type AuthResponse = z.infer<typeof AuthResponseSchema>;
 export type NewAuth = Omit<Auth, 'id'>;
 
 export type ApiResponse<T> = { success: true; data: T } | { success: false; error: string };
