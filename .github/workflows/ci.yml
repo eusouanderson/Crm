@@ -51,11 +51,11 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
-      - name: 🧪 Run tests
-        run: bun test
-        working-directory: ./backend
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
+      # - name: 🧪 Run tests
+      #   run: bun test
+      #   working-directory: ./backend
+      #   env:
+      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
       - name: 🧾 Coverage
         run: bun run test:coverage
