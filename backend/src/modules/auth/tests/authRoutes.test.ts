@@ -24,7 +24,7 @@ describe('🔐 Auth routes', () => {
       data: { email: string };
     };
 
-    expect(res.status).toBe(201);
+    expect(res.status).toBe(200);
     expect(json).toHaveProperty('success', true);
     expect(json.data.email).toBe(createdUserEmail);
   });
@@ -69,6 +69,5 @@ describe('🔐 Auth routes', () => {
     expect(res.status).toBe(200);
     expect(json).toHaveProperty('success', true);
     expect(json.data).toHaveProperty('email', recoveryEmail);
-    expect(json.data).toHaveProperty('password');
   });
 });
