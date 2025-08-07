@@ -7,7 +7,7 @@ GET {{baseURL}}/
 GET {{baseURL}}/users
 
 ### ✅ Buscar usuário por ID
-GET {{baseURL}}/users/11
+GET {{baseURL}}/users/9999
 
 ### ✅ Criar novo usuário
 POST {{baseURL}}/users
@@ -21,15 +21,14 @@ Content-Type: application/json
 }
 
 ### ✅ Atualizar usuário existente
-PUT {{baseURL}}/users/11
-Content-Type: application/json
+PUT {{baseURL}}/users/9999
 
 {
   "firstName": "Anderson Atualizado",
   "lastName": "Rodrigues",
-  "email": "anderson.novo@outlook.com",
+  "email": "anders6on.novo@outlook.com",
   "password": "novaSenha456"
 }
 
 ### ✅ Deletar usuário
-DELETE {{baseURL}}/users/15
+DELETE {{baseURL}}/users/7

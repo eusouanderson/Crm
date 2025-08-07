@@ -1,7 +1,7 @@
 import app from '@/index';
 import { describe, expect, it } from 'bun:test';
 
-describe('Users routes', () => {
+describe('🔐 Users routes', () => {
   let createdUserId: number;
 
   it('GET /users should respond correctly with expected structure', async () => {
@@ -16,7 +16,7 @@ describe('Users routes', () => {
         password: string;
       }>;
     };
-
+    expect(res.status).toBe(200);
     expect(json).toHaveProperty('success', true);
     expect(Array.isArray(json.data)).toBe(true);
 

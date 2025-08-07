@@ -1,0 +1,33 @@
+@baseURL = http://localhost:3005
+
+### ✅ Health Check ou Root
+GET {{baseURL}}/
+
+### ✅ Register (Cadastro)
+POST {{baseURL}}/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Anderson",
+  "lastName": "Silva",
+  "email": "eusouaderson@outlook.com",
+  "password": "senha123"
+}
+
+### ✅ Login
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "eusouaderson@outlook.com",
+  "password": "senha123"
+}
+
+### ✅ Recovery (Recuperar senha)
+POST {{baseURL}}/auth/recovery
+Content-Type: application/json
+
+{
+  "email": "eusouaderson@outlook.com",
+  "newPassword": "novaSenha456"
+}

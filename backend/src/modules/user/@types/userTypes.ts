@@ -23,3 +23,4 @@ export const ApiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
 export type User = z.infer<typeof UserSchema>;
 export type ApiResponse<T extends z.ZodTypeAny> = z.infer<ReturnType<typeof ApiResponseSchema<T>>>;
 export type NewUser = Omit<User, 'id'>;
+export const UsersSchema = z.array(UserSchema);

@@ -1,6 +1,6 @@
 import { db } from '@/database/db';
 import { users } from '@/database/schema/users';
-import { NewUser, User } from '@/modules/user/@types/userTypes.';
+import { NewUser, User } from '@/modules/user/@types/userTypes';
 import { eq } from 'drizzle-orm';
 
 export async function insertUser(data: NewUser): Promise<User | undefined> {

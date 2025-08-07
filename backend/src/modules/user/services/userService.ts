@@ -1,8 +1,9 @@
 import { crypt } from '@/middlewares/passwordBycript';
-import { ApiResponse, NewUser, User } from '@/modules/user/@types/userTypes.';
+import { ApiResponse, NewUser, UserSchema, UsersSchema } from '@/modules/user/@types/userTypes';
 import * as repo from '@/modules/user/repositories/userRepository';
+import z from 'zod';
 
-export async function createUser(data: NewUser): Promise<ApiResponse<User>> {
+export async function createUser(data: NewUser): Promise<ApiResponse<typeof UserSchema>> {
   try {
     if (!data.password) {
       throw new Error('Password required');
@@ -18,7 +19,8 @@ export async function createUser(data: NewUser): Promise<ApiResponse<User>> {
   }
 }
 
-export async function getUsers(): Promise<ApiResponse<User[]>> {
+// Corrigido para retornar ApiResponse de array de usuários
+export async function getUsers(): Promise<ApiResponse<typeof UsersSchema>> {
   try {
     const list = await repo.selectUsers();
     return { success: true, data: list };
@@ -27,7 +29,7 @@ export async function getUsers(): Promise<ApiResponse<User[]>> {
   }
 }
 
-export async function getUserById(id: number): Promise<ApiResponse<User>> {
+export async function getUserById(id: number): Promise<ApiResponse<typeof UserSchema>> {
   try {
     const user = await repo.selectUserById(id);
     if (!user) throw new Error('User not Found');
@@ -40,7 +42,7 @@ export async function getUserById(id: number): Promise<ApiResponse<User>> {
 export async function updateUserById(
   id: number,
   data: Partial<NewUser>
-): Promise<ApiResponse<User>> {
+): Promise<ApiResponse<typeof UserSchema>> {
   try {
     const updated = await repo.updateUser(id, data);
     if (!updated) throw new Error('Error Update');
@@ -50,12 +52,17 @@ export async function updateUserById(
   }
 }
 
+const DeleteResponseSchema = z.object({
+  message: z.string(),
+  id: z.number(),
+});
+
 export async function deleteUserById(
   id: number
-): Promise<ApiResponse<{ message: string; id: number }>> {
+): Promise<ApiResponse<typeof DeleteResponseSchema>> {
   try {
     const deleted = await repo.deleteUser(id);
-    console.log(deleted);
+
     if (!deleted) {
       return { success: false, error: 'User not found' };
     }
