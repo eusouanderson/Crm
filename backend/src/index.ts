@@ -12,7 +12,7 @@ const app = new Hono({
     routers: [new RegExpRouter(), new TrieRouter()],
   }),
 });
-
+console.log(process.env.DATABASE_URL);
 app.use('*', cors());
 app.use('*', errorHandler());
 
