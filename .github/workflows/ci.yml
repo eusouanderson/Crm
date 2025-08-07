@@ -26,6 +26,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
+      NODE_ENV: test
+
     steps:
       - name: 📥 Checkout repo
         uses: actions/checkout@v4
@@ -39,29 +43,41 @@ jobs:
         run: bun install
         working-directory: ./backend
 
+      - name: ⏳ Wait for PostgreSQL to be ready
+        run: |
+          for i in {1..10}; do
+            if pg_isready -h localhost -p 5432 -U postgres -d crm_test; then
+              echo "PostgreSQL is ready!"
+              exit 0
+            fi
+            echo "Waiting for PostgreSQL... Attempt $i/10"
+            sleep 3
+          done
+          echo "PostgreSQL failed to start"
+          exit 1
+
       - name: ⚙️ Run migrations
-        run: bun run migrate
+        run: |
+          bun run migrate
+          # Verifica se as tabelas foram criadas
+          psql $DATABASE_URL -c "\dt"
         working-directory: ./backend
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
       - name: 🌱 Seed database
-        run: bun run seed
+        run: |
+          bun run seed
+          # Verifica se os dados foram inseridos (ajuste para suas tabelas)
+          psql $DATABASE_URL -c "SELECT COUNT(*) FROM users;" || true
         working-directory: ./backend
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
 
-      # - name: 🧪 Run tests
-      #   run: bun test
-      #   working-directory: ./backend
-      #   env:
-      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
+      - name: 🧪 Run tests
+        run: bun test
+        working-directory: ./backend
 
-      # - name: 🧾 Coverage
-      #   run: bun run test:coverage
-      #   working-directory: ./backend
-      #   env:
-      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/crm_test
+      - name: 🧾 Coverage
+        run: bun run test:coverage
+        working-directory: ./backend
+
       - name: ⬆️ Upload coverage artifact
         uses: actions/upload-artifact@v4
         with:
