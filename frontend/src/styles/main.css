@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+
+/* stylelint-disable at-rule-no-unknown */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  /* === Cores primárias === */
+  --color-primary-500: #2B76D9;
+  --color-secondary-500: #04C4D9;
+  --color-success-500: #027333;
+  --color-warning-500: #F2CB05;
+  --color-neutral-900: #001432;
+
+ 
+
+  /* === Sombras === */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* === Espaçamento personalizado === */
+  --spacing-128: 32rem;
+  --spacing-144: 36rem;
+
+  /* === Breakpoint extra === */
+  --breakpoint-3xl: 120rem;
+}
+
+/* Modo escuro usando atributo data-theme */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Tema escuro */
+@theme dark {
+  --color-primary-500: #1B3F73;
+  --color-secondary-500: #035E73;
+  --color-success-500: #014422;
+  --color-warning-500: #C2A705;
+  --color-neutral-900: #000A1A;
+}
