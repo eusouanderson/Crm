@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/src/assets/styles/main.css" rel="stylesheet">
-    <title>Welcome to Vuetify 3</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary Meta Tags -->
+  <title>Financy CRM | Modern Financial Management System</title>
+  <meta name="description" content="Advanced financial CRM solution for managing clients, investments, and financial portfolios with real-time analytics">
+  <meta name="author" content="Financy Inc.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Viewport & Mobile Optimization -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1e40af">
+  
+  <!-- PWA Configuration -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Financy CRM">
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="/src/assets/styles/main.css" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style">
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css" as="style">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/src/assets/styles/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.x/css/materialdesignicons.min.css">
+  
+  <!-- Preconnect to CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crm.financyapp.com/">
+  <meta property="og:title" content="Financy CRM | Modern Financial Management System">
+  <meta property="og:description" content="Advanced financial CRM solution for managing clients, investments, and financial portfolios">
+  <meta property="og:image" content="https://crm.financyapp.com/social-preview.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@financycrm">
+  <meta name="twitter:title" content="Financy CRM | Modern Financial Management System">
+  <meta name="twitter:description" content="Advanced financial CRM solution for managing clients, investments, and financial portfolios">
+  <meta name="twitter:image" content="https://crm.financyapp.com/social-preview.jpg">
+</head>
+<body class="font-sans antialiased text-gray-900 bg-gray-50">
+  <!-- App Mount Point -->
+  <div id="app"></div>
+  
+  <!-- Performance Monitoring (optional) -->
+  <script>
+    if ('performance' in window) {
+      window.appStartTime = performance.now();
+    }
+  </script>
+  
+  <!-- Main Script -->
+  <script type="module" src="/src/main.ts"></script>
+  
+  <!-- Fallback for older browsers -->
+  <script>
+    if (!window.Promise || !window.URL || !window.Proxy || !window.Map || !window.Set) {
+      window.location.href = '/unsupported-browser.html';
+    }
+  </script>
+</body>
 </html>

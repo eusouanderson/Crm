@@ -141,7 +141,6 @@ async function handleSend() {
       errorMsg.value = response.data.error || "Erro no login";
       showError.value = true;
     } else {
-      // Login bem-sucedido
       alert("Login realizado com sucesso!");
     }
   } catch (err) {

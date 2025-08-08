@@ -1,14 +1,13 @@
 <template>
   <div
-    class="flex items-center justify-center my-10 group cursor-pointer transition-all duration-300 hover:scale-105"
+    class="flex items-center justify-center my-10 group cursor-pointer bg-zinc-50/10 rounded-2xl transition-all duration-300 hover:scale-105"
   >
-    <!-- Logo com animação -->
     <div
       class="relative h-16 w-16 mr-4 animate-bounce group-hover:animate-spin"
     >
       <img
         :src="logo"
-        alt="CrediEazy Logo"
+        alt="Financy Logo"
         class="h-full w-full object-contain drop-shadow-lg transition-all duration-500 group-hover:rotate-12"
       />
       <div
@@ -16,12 +15,11 @@
       ></div>
     </div>
 
-    <!-- Nome da aplicação -->
     <h1 class="text-4xl font-extrabold tracking-tight">
       <span
         class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400"
       >
-        CrediEazy
+        Financy
       </span>
       <span
         class="ml-2 text-xs font-medium bg-blue-100 text-blue-600 px-2 py-1 rounded-full align-super"
@@ -37,7 +35,6 @@ import logo from "@/assets/logo.png";
 </script>
 
 <style>
-/* Animação personalizada */
 @keyframes bounce {
   0%,
   100% {
