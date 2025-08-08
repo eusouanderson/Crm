@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ApiErrorSnackbar: typeof import('./src/components/error/ApiErrorSnackbar.vue')['default']
     Background: typeof import('./src/components/atoms/Background.vue')['default']
     Badges: typeof import('./src/components/atoms/Badges.vue')['default']
     Button: typeof import('./src/components/atoms/Button.vue')['default']
@@ -20,6 +21,7 @@ declare module 'vue' {
     LoginBox: typeof import('./src/components/molecules/LoginBox.vue')['default']
     LoginPage: typeof import('./src/components/pages/LoginPage.vue')['default']
     LoginTemplate: typeof import('./src/components/templates/LoginTemplate.vue')['default']
+    Logo: typeof import('./src/components/atoms/Logo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SideBarTemplate: typeof import('./src/components/templates/SideBarTemplate.vue')['default']

@@ -1,8 +1,8 @@
 import { errorHandler } from '@/middlewares/errorHandler';
 import { userRoutes } from '@/modules/user/routes/userRoutes';
-import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { logger } from 'hono/logger';
 import { RegExpRouter } from 'hono/router/reg-exp-router';
 import { SmartRouter } from 'hono/router/smart-router';
 import { TrieRouter } from 'hono/router/trie-router';
@@ -17,13 +17,11 @@ const app = new Hono({
 app.use('*', cors());
 app.use('*', errorHandler());
 
+app.use('*', logger());
+
 app.route('/users', userRoutes);
 app.route('/auth', authRoutes);
 
 app.get('/', (c) => c.text('message: Api is running!'));
 
-serve({
-  fetch: app.fetch,
-  port: 3005,
-});
 export default app;

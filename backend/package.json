@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "bun --watch src/index.ts",
+    "dev": "bun src/index.ts",
+    "server": "bun --watch src/index.ts",
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit push",
     "test": "bun test",

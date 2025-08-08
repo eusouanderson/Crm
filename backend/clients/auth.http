@@ -1,4 +1,4 @@
-@baseURL = http://localhost:3005
+@baseURL = http://localhost:3000
 
 ### ✅ Health Check ou Root
 GET {{baseURL}}/
@@ -10,7 +10,7 @@ Content-Type: application/json
 {
   "firstName": "Anderson",
   "lastName": "Silva",
-  "email": "eusouaderson@outlook.com",
+  "email": "eusouanderson@outlook.com",
   "password": "senha123"
 }
 
