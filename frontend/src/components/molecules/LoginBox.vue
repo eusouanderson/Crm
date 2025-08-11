@@ -14,7 +14,7 @@
     >
       <form @submit.prevent="handleSend">
         <div class="text-subtitle-1 text-deep-purple-darken-4 mb-2 font-comic">
-          Account
+          Login
         </div>
 
         <div class="text-caption text-decoration-none mb-2">
@@ -24,7 +24,11 @@
             placeholder="Your email address"
             icon="mdi-email-outline"
             class="font-comic"
-            style="background-color: #2b76d9; border-radius: 20px"
+            style="
+              background-color: #2b76d9;
+              border-radius: 20px;
+              padding: auto;
+            "
           />
         </div>
 
@@ -37,6 +41,7 @@
             href="#"
             rel="noopener noreferrer"
             target="_blank"
+            @click.prevent="$router.push('/recovery')"
           >
             Forgot login password?
           </a>
@@ -99,6 +104,7 @@
           href="#"
           rel="noopener noreferrer"
           target="_blank"
+          @click.prevent="$router.push('/register')"
         >
           Sign up now
           <v-icon icon="mdi-chevron-right" class="animate-pulse"></v-icon>
@@ -113,7 +119,7 @@
 import { ref, computed } from "vue";
 import Input from "@/components/atoms/Input.vue";
 import Button from "@/components/atoms/Button.vue";
-import Logo from "../atoms/Logo.vue";
+import Logo from "@/components/atoms/Logo.vue";
 import { api } from "@/services/api";
 
 import ApiErrorSnackbar from "@/components/error/ApiErrorSnackbar.vue";

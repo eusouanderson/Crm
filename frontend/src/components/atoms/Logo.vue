@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-center my-10 group cursor-pointer bg-zinc-50/10 rounded-2xl transition-all duration-300 hover:scale-105"
+    class="flex items-center justify-center my-10 group cursor-pointer rounded-2xl transition-all duration-300 hover:scale-105"
   >
     <div
       class="relative h-16 w-16 mr-4 animate-bounce group-hover:animate-spin"

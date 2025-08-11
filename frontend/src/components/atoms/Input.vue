@@ -1,5 +1,8 @@
 <template>
-  <v-responsive class="mx-auto bg-dark-zinc" :max-width="maxWidth">
+  <v-responsive
+    class="mx-auto bg-dark-zinc w-full font-comic"
+    :max-width="maxWidth"
+  >
     <v-text-field
       v-model="model"
       :label="label"
@@ -26,7 +29,7 @@ const props = defineProps({
   type: { type: String, default: "text" },
   placeholder: { type: String, default: "" },
   icon: { type: String, default: null },
-  maxWidth: { type: [String, Number], default: 344 },
+  maxWidth: { type: [String, Number], default: "100%" },
   hideDetails: { type: String, default: "auto" },
   variant: { type: String, default: "outlined" },
   density: { type: String, default: "compact" },

@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex flex-col justify-center items-center px-4">
-    <h1 class="text-3xl font-bold mb-6 text-center">Template Login</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center">Template Recovery</h1>
     <div class="flex justify-center mt-6">
       <Button
         color="primary"
@@ -9,18 +9,17 @@
         @click="goHome"
         class="px-6 py-2 rounded-lg shadow-md hover:bg-primary hover:text-white transition-colors"
       >
-        Go to Home
+        Go to Login
       </Button>
     </div>
-    <LoginBox />
+    <RecoveryBox />
   </div>
 </template>
-
 <script setup>
+import RecoveryBox from "@/components/molecules/RecoveryBox.vue";
 import Button from "@/components/atoms/Button.vue";
-import LoginBox from "@/components/molecules/LoginBox.vue";
 import router from "@/router";
 function goHome() {
-  router.push("/");
+  router.push("/login");
 }
 </script>

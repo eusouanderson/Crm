@@ -1,32 +1,36 @@
 <template>
   <v-app>
-    <v-main>
-      <router-view />
+    <v-main class="main-wrapper">
+      <div class="relative min-h-screen overflow-hidden">
+        <Background class="background-layer" />
+        <router-view />
+      </div>
     </v-main>
   </v-app>
 </template>
 
-<script setup lang="ts"></script>
-<style lang="css">
-html,
-body,
-#app,
-.v-application {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Para garantir que o v-main ocupe toda a área disponível */
-.v-main {
-  min-height: 100dvh;
+<style lang="css" scoped>
+.main-wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.background-layer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+.relative {
+  min-height: 100vh;
 }
 </style>
