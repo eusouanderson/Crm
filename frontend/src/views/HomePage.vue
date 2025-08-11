@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 text-white p-6 space-y-6 z-50"
+    class="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-blue-900 via-purple-900/50 to-pink-900/50 text-white p-6 space-y-6 z-50"
   >
     <svg
       class="w-20 h-20 animate-pulse text-yellow-400"
@@ -28,13 +28,6 @@
       🚧 We’re building something amazing. Please check back soon!
     </p>
 
-    <div class="mt-4">
-      <button
-        @click="$router.back()"
-        class="px-6 py-3 bg-yellow-400 text-yellow-900 font-bold rounded-lg shadow-lg hover:bg-yellow-500 transition"
-      >
-        Go Back
-      </button>
-    </div>
+    <div class="mt-4"></div>
   </div>
 </template>
