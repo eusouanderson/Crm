@@ -12,7 +12,6 @@ import * as userRepo from '@/modules/user/repositories/userRepository';
 type LoginPayload = { email: string; password: string };
 type RecoverPayload = { email: string; newPassword: string };
 
-// Função auxiliar para transformar Auth em AuthResponse
 function toAuthResponse(auth: Auth): AuthResponse {
   return AuthResponseSchema.parse(auth);
 }
@@ -20,9 +19,14 @@ function toAuthResponse(auth: Auth): AuthResponse {
 export async function registerUser(data: NewAuth): Promise<ApiResponse<AuthResponse>> {
   try {
     if (!data.password) throw new Error('Password is required');
+    const existingUser = await authRepo.findUserByEmail(data.email);
+
+    if (existingUser) throw new Error('Email is already registered');
     const hashed = await crypt({ password: data.password });
+
     const created = await userRepo.insertUser({ ...data, password: hashed });
     if (!created) throw new Error('Failed to create user');
+
     return { success: true, data: toAuthResponse(created) };
   } catch (e) {
     return { success: false, error: (e as Error).message };
