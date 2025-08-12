@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Schema completo com password
 export const AuthSchema = z.object({
   id: z.number(),
   firstName: z.string().nullable(),
