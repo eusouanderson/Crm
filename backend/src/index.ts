@@ -7,6 +7,7 @@ import { RegExpRouter } from 'hono/router/reg-exp-router';
 import { SmartRouter } from 'hono/router/smart-router';
 import { TrieRouter } from 'hono/router/trie-router';
 import { authRoutes } from './modules/auth/routes/authRoutes';
+import { categoriesRoutes } from './modules/categories/routes/categoriesRoutes';
 
 const app = new Hono({
   router: new SmartRouter({
@@ -21,6 +22,7 @@ app.use('*', logger());
 
 app.route('/users', userRoutes);
 app.route('/auth', authRoutes);
+app.route('/categories', categoriesRoutes);
 
 app.get('/', (c) => c.text('message: Api is running!'));
 

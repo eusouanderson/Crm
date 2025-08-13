@@ -1,20 +1,42 @@
 import { crypt } from '@/middlewares/passwordBycript';
-import { ApiResponse, NewUser, UserSchema, UsersSchema } from '@/modules/user/@types/userTypes';
+import {
+  ApiResponse,
+  NewUser,
+  NewUserSchema,
+  UserSchema,
+  UsersSchema,
+} from '@/modules/user/@types/userTypes';
 import * as repo from '@/modules/user/repositories/userRepository';
 import z from 'zod';
 
-export async function createUser(data: NewUser): Promise<ApiResponse<typeof UserSchema>> {
+export async function createUser(data: unknown): Promise<ApiResponse<typeof UserSchema>> {
   try {
-    if (!data.password) {
-      throw new Error('Password required');
-    }
-    const hashedPassword = await crypt({ password: data.password });
-    const userWithHashedPassword = { ...data, password: hashedPassword };
+    const validatedData = NewUserSchema.parse(data);
+
+    const hashedPassword = await crypt({ password: validatedData.password });
+    const userWithHashedPassword = {
+      ...validatedData,
+      password: hashedPassword,
+    };
+
     const created = await repo.insertUser(userWithHashedPassword);
-    if (!created) throw new Error('Erro create user');
+    if (!created) {
+      return { success: false, error: 'Error creating user' };
+    }
 
     return { success: true, data: created };
   } catch (e) {
+    if (e instanceof z.ZodError) {
+      return {
+        success: false,
+        error: 'Validation failed',
+        errors: e.issues.map((issue) => ({
+          field: issue.path.join('.'),
+          message: issue.message,
+        })),
+      };
+    }
+
     return { success: false, error: (e as Error).message };
   }
 }

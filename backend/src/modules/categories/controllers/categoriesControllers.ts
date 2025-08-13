@@ -157,7 +157,21 @@ export const deleteCategoryHandler = async (c: Context) => {
     const idValidated = idParamSchema.parse({ id: Number(id) });
 
     const result = await deleteCategory(idValidated.id);
-    return c.json(result, result.success ? 200 : 400);
+
+    if (result.success) {
+      return c.json(
+        {
+          success: true,
+          data: {
+            message: 'Category deleted',
+            id: idValidated.id,
+          },
+        },
+        200
+      );
+    }
+
+    return c.json(result, 400);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return c.json(

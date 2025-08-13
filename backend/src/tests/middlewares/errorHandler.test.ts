@@ -1,7 +1,7 @@
 import { errorHandler } from '@/middlewares/errorHandler';
 import { describe, expect, it } from 'bun:test';
 
-describe('errorHandler middleware', () => {
+describe('⚠️ errorHandler middleware', () => {
   it('should call next without errors', async () => {
     const c = {
       json: (body: any, status: number) => ({ body, status }),

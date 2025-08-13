@@ -3,7 +3,7 @@ import * as t from 'drizzle-orm/pg-core';
 import { pgTable as table } from 'drizzle-orm/pg-core';
 
 export const transactions = table('transactions', {
-  id: t.uuid('id').primaryKey().defaultRandom(),
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
   title: t.varchar('title', { length: 255 }).notNull(),
   amount: t.numeric('amount', { precision: 10, scale: 2 }).notNull(),
   type: t.text('type').$type<'income' | 'expense'>().notNull(),

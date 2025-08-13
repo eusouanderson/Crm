@@ -5,7 +5,7 @@ import {
   getUserById,
   getUsers,
   updateUserById,
-} from '../services/userService';
+} from '../service/userService';
 
 export async function createUserHandler(c: Context) {
   const data = await c.req.json();
