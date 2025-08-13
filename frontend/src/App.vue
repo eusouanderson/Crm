@@ -2,8 +2,11 @@
   <v-app>
     <v-main class="main-wrapper">
       <div class="relative min-h-screen overflow-hidden">
-        <Background class="background-layer" />
-        <router-view />
+        <!-- <Background class="background-layer" /> -->
+
+        <div class="content-layer">
+          <router-view />
+        </div>
       </div>
     </v-main>
   </v-app>
@@ -32,5 +35,6 @@
 
 .relative {
   min-height: 100vh;
+  position: relative;
 }
 </style>

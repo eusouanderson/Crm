@@ -45,6 +45,7 @@ declare module 'vue' {
     TransactionList: typeof import('./src/components/molecules/TransactionList.vue')['default']
     TransactionManagement: typeof import('./src/components/organisms/TransactionManagement.vue')['default']
     TransactionsPage: typeof import('./src/components/pages/TransactionsPage.vue')['default']
+    UnderConstruction: typeof import('./src/components/pages/UnderConstruction.vue')['default']
     VBadges: typeof import('./src/components/atoms/VBadges.vue')['default']
     VButton: typeof import('./src/components/atoms/VButton.vue')['default']
     VDialog: typeof import('./src/components/atoms/VDialog.vue')['default']

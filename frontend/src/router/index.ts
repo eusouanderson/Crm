@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    component: () => import("@/components/pages/DashboardPage.vue"),
+    component: () => import("@/components/pages/UnderConstruction.vue"),
     meta: { requiresAuth: true },
   },
   {
@@ -44,7 +44,7 @@ const router = createRouter({
 });
 
 //  teste
-const isMockAuthenticated = false;
+const isMockAuthenticated = true;
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !isMockAuthenticated) {
