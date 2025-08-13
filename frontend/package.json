@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "gsap": "^3.13.0",
     "install": "^0.13.0",
+    "pinia": "^3.0.3",
     "tailwindcss": "^4.1.11",
     "three": "^0.179.1",
     "undici": "^7.13.0",

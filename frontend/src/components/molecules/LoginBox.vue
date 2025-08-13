@@ -54,7 +54,7 @@
             placeholder="Your Password"
             type="password"
             icon="mdi-lock-outline"
-            showPasswordToggle="true"
+            :showPasswordToggle="true"
             class="font-comic"
             style="background-color: #2b76d9; border-radius: 20px"
             @click:append-inner="toggleVisible()"
@@ -133,23 +133,30 @@ const showError = ref(false);
 const isDisabled = computed(() => !email.value || !password.value);
 
 async function handleSend() {
+  console.log("handleSend chamado");
+  console.log("Email:", email.value);
+  console.log("Password:", password.value);
   isSaving.value = true;
   errorMsg.value = "";
   showError.value = false;
 
   try {
-    const response = await api.post("/auth/login", {
+    const payload = {
       email: email.value,
       password: password.value,
-    });
+    };
+    const response = await api.post("/auth/login", payload);
+    console.log("Payload enviado para API:", payload);
 
     if (!response.data.success) {
       errorMsg.value = response.data.error || "Erro no login";
       showError.value = true;
     } else {
+      console.log("Login realizado com sucesso:", response.data);
       alert("Login realizado com sucesso!");
     }
   } catch (err) {
+    console.error("Erro ao chamar a API:", err);
     errorMsg.value =
       err.response?.data?.error || "Falha na conexão com o servidor";
     showError.value = true;

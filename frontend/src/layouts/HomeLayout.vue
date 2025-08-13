@@ -1,19 +1,20 @@
 <template>
-  <div class="relative min-h-screen flex flex-col">
+  <v-app>
     <HeaderTemplate />
+    <SideBarTemplate />
 
-    <div class="flex flex-1">
-      <SideBarTemplate />
-      <main class="flex-grow p-4">
-        <h1>Olá, Página Home</h1>
-      </main>
-    </div>
+    <v-main>
+      <v-container fluid>
+        <slot />
+      </v-container>
+    </v-main>
 
     <FooterTemplate />
-  </div>
+  </v-app>
 </template>
 
-<script setup>
-import FooterTemplate from "@/components/templates/FooterTemplate.vue";
+<script setup lang="ts">
 import HeaderTemplate from "@/components/templates/HeaderTemplate.vue";
+import SideBarTemplate from "@/components/templates/SideBarTemplate.vue";
+import FooterTemplate from "@/components/templates/FooterTemplate.vue";
 </script>

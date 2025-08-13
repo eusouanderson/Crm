@@ -5,6 +5,8 @@ import { seed } from 'drizzle-seed';
 async function main() {
   const db = drizzle(process.env.DATABASE_URL);
 
+  await db.execute('TRUNCATE TABLE users RESTART IDENTITY CASCADE;');
+
   await seed(db, { users });
 
   await db.execute(

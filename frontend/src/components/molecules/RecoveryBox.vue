@@ -36,7 +36,7 @@
             placeholder="Enter new password"
             type="password"
             icon="mdi-lock-outline"
-            showPasswordToggle="true"
+            :showPasswordToggle="true"
             class="font-comic"
             style="background-color: #2b76d9; border-radius: 20px"
           />
@@ -49,7 +49,7 @@
             placeholder="Repeat new password"
             type="password"
             icon="mdi-lock-check-outline"
-            showPasswordToggle="true"
+            :showPasswordToggle="true"
             class="font-comic"
             style="background-color: #2b76d9; border-radius: 20px"
           />

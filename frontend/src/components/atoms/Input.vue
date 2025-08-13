@@ -13,7 +13,6 @@
         showPasswordToggle ? (visible ? 'mdi-eye-off' : 'mdi-eye') : null
       "
       :hide-details="hideDetails"
-      :variant="solo"
       :density="density"
       @click:append-inner="toggleVisibleLocal"
     />

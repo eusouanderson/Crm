@@ -1,36 +1,59 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import LoginPage from "@/components/pages/LoginPage.vue";
-import RecoveryPage from "@/components/pages/RecoveryPage.vue";
-import RegisterPage from "@/components/pages/RegisterPage.vue";
-import HomePage from "@/views/HomePage.vue";
-
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: HomePage,
+    component: () => import("@/components/pages/DashboardPage.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",
-    name: "Login",
-    component: LoginPage,
+    component: () => import("@/components/pages/LoginPage.vue"),
+    meta: { requiresGuest: true },
+  },
+  {
+    path: "/transactions",
+    component: () => import("@/components/pages/TransactionsPage.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/categories",
+    component: () => import("@/components/pages/CategoriesPage.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/reports",
+    component: () => import("@/components/pages/ReportsPage.vue"),
+    meta: { requiresAuth: true },
   },
   {
     path: "/register",
-    name: "Register",
-    component: RegisterPage,
+    component: () => import("@/components/pages/RegisterPage.vue"),
+    meta: { requiresAuth: false },
   },
   {
     path: "/recovery",
-    name: "Recovery",
-    component: RecoveryPage,
+    component: () => import("@/components/pages/RecoveryPage.vue"),
+    meta: { requiresAuth: false },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+//  teste
+const isMockAuthenticated = false;
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !isMockAuthenticated) {
+    next("/login");
+  } else if (to.meta.requiresGuest && isMockAuthenticated) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;
