@@ -3,7 +3,12 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    component: () => import("@/components/pages/UnderConstruction.vue"),
+    component: () => import("@/components/pages/LandingPage.vue"),
+    meta: { requiresAuth: false },
+  },
+  {
+    path: "/dashboard",
+    component: () => import("@/components/pages/DashboardPage.vue"),
     meta: { requiresAuth: true },
   },
   {
@@ -50,7 +55,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !isMockAuthenticated) {
     next("/login");
   } else if (to.meta.requiresGuest && isMockAuthenticated) {
-    next("/");
+    next("/dashboard");
   } else {
     next();
   }
